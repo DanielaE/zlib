@@ -24,3 +24,8 @@
 /configure.log
 
 .DS_Store
+.vs
+x64
+Win32
+lib64
+lib32
