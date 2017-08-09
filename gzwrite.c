@@ -368,7 +368,7 @@ int ZEXPORT gzputs(file, str)
 
     /* write string */
     len = strlen(str);
-    ret = gz_write(state, str, len);
+    ret = (int)gz_write(state, str, len);
     return ret == 0 && len != 0 ? -1 : ret;
 }
 
