@@ -28,6 +28,7 @@ void BeginCountRdtsc(LARGE_INTEGER * pbeginTime64)
 
 LARGE_INTEGER GetResRdtsc(LARGE_INTEGER beginTime64,BOOL fComputeTimeQueryPerf)
 {
+	(void)fComputeTimeQueryPerf;
     LARGE_INTEGER LIres;
     unsigned _int64 res=__rdtsc()-((unsigned _int64)(beginTime64.QuadPart));
     LIres.QuadPart=res;
@@ -151,7 +152,6 @@ int main(int argc, char *argv[])
     unsigned char* FilePtr;
     long lBufferSizeCpr;
     long lBufferSizeUncpr;
-    long lCompressedSize=0;
     unsigned char* CprPtr;
     unsigned char* UncprPtr;
     long lSizeCpr,lSizeUncpr;
@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
             long all_read_before = zcpr.total_in;
             zcpr.avail_in = min(lOrigToDo,BlockSizeCompress);
             zcpr.avail_out = BlockSizeCompress;
-            ret=deflate(&zcpr,(zcpr.avail_in==lOrigToDo) ? Z_FINISH : Z_SYNC_FLUSH);
+            ret=deflate(&zcpr,((long)zcpr.avail_in==lOrigToDo) ? Z_FINISH : Z_SYNC_FLUSH);
             lOrigDone += (zcpr.total_in-all_read_before);
             lOrigToDo -= (zcpr.total_in-all_read_before);
             step++;
