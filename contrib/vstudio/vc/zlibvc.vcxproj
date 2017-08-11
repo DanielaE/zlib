@@ -44,10 +44,11 @@
   </PropertyGroup>
   <PropertyGroup>
     <IntDir>$(Platform)\$(Configuration)-$(ProjectName)\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup>
-    <TargetName Condition="'$(ZLib_WINAPI)'=='true'">zlibwapi</TargetName>
-    <TargetName Condition="'$(ZLib_WINAPI)'!='true'">zlib1</TargetName>
+    <TargetName>zlib</TargetName>
+    <TargetName Condition="'$(ZLib_WINAPI)'=='true'">$(TargetName)wapi</TargetName>
+    <TargetName>$(TargetName)-vc$(PlatformToolsetVersion)-mt</TargetName>
+    <TargetName Condition="'$(Configuration)'=='Debug'">$(TargetName)-gd</TargetName>
+    <TargetName>$(TargetName)-1.2.11</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(ZLib_WINAPI)'=='true'">
     <ClCompile>
@@ -56,7 +57,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>
     <Link>
-      <ImportLibrary>$(SolutionDir)$(LibraryArchitecture)\$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)$(LibraryArchitecture)\$(TargetName).lib</ImportLibrary>
       <ModuleDefinitionFile>zlibvc.def</ModuleDefinitionFile>
       <SubSystem>Windows</SubSystem>
     </Link>
@@ -64,7 +65,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_NONSTDC_NO_DEPRECATE;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_WARNINGS;ZLIB_DLL;ZLIB_BUILD_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -109,6 +110,7 @@
     <None Include="zlibvc.def" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\autolink.h" />
     <ClInclude Include="..\..\..\deflate.h" />
     <ClInclude Include="..\..\..\infblock.h" />
     <ClInclude Include="..\..\..\infcodes.h" />
