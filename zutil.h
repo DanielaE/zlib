@@ -19,6 +19,8 @@
 #  define ZLIB_INTERNAL
 #endif
 
+#pragma warning(disable: 4127 4131)
+
 #include "zlib.h"
 
 #if defined(STDC) && !defined(Z_SOLO)

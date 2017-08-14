@@ -1690,10 +1690,10 @@ local block_state deflate_stored(s, flush)
         _tr_stored_block(s, (char *)0, 0L, last);
 
         /* Replace the lengths in the dummy stored block with len. */
-        s->pending_buf[s->pending - 4] = len;
-        s->pending_buf[s->pending - 3] = len >> 8;
-        s->pending_buf[s->pending - 2] = ~len;
-        s->pending_buf[s->pending - 1] = ~len >> 8;
+        s->pending_buf[s->pending - 4] = (Byte)len;
+        s->pending_buf[s->pending - 3] = (Byte)(len >> 8);
+        s->pending_buf[s->pending - 2] = (Byte)(~len);
+        s->pending_buf[s->pending - 1] = (Byte)(~len >> 8);
 
         /* Write the stored block header bytes. */
         flush_pending(s->strm);

@@ -10,6 +10,8 @@
 
 */
 
+#pragma warning(disable: 4131 4100)
+
 #if defined(_WIN32) && (!(defined(_CRT_SECURE_NO_WARNINGS)))
         #define _CRT_SECURE_NO_WARNINGS
 #endif

@@ -8,6 +8,8 @@
 #define ZLIB_INTERNAL
 #include "zlib.h"
 
+#pragma warning(disable: 4131)
+
 /* ===========================================================================
      Decompresses the source buffer into the destination buffer.  *sourceLen is
    the byte length of the source buffer. Upon entry, *destLen is the total size

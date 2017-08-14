@@ -18,6 +18,8 @@
 #  define ZLIB_INTERNAL
 #endif
 
+#pragma warning(disable: 4127 4131)
+
 #include <stdio.h>
 #include "zlib.h"
 #ifdef STDC
